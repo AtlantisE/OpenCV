@@ -1,22 +1,16 @@
-#include <iostream>
-#include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/imgcodecs.hpp>
+#include<TestCV.h>
 
-using namespace std;
-using namespace cv;
-
-int main(char argc, char* argv[])
+int TestCV::Chapter2_ReadImage(const string& strImgFile)
 {
-	cout << "Progarm is Starting" << endl;
-
+	int status = OK;
 	Mat image;
 
-
-	image = imread("..\\..\\resources\\images\\hand.jpg");
+	image = imread(strImgFile);
 	if (image.empty())
 	{
 		cout << "Read Error" << endl;
+		status = FALSE;
+		goto exit;
 	}
 
 	cout << "This image is " << image.rows << " x " << image.cols << endl;
@@ -24,6 +18,49 @@ int main(char argc, char* argv[])
 	namedWindow("Original Image", WINDOW_AUTOSIZE);
 	imshow("Original Image", image);
 
+	exit:
 	waitKey(0);
-	return 0;
+	destroyWindow("Original Image");
+	return status;
 }
+
+int TestCV::Chapter2_ReadVideo(const string& strVideoFile)
+{
+	int status = OK;
+	Mat frame;
+	VideoCapture cap;
+	int count = 0;//count frame number
+
+	namedWindow("Video", WINDOW_AUTOSIZE);
+	cap.open(strVideoFile);
+	if (cap.isOpened() == false)
+	{
+		cout << "Video <" << strVideoFile << "> open failed!" << endl;
+		status = FALSE;
+		goto exit;
+	}
+
+	
+	for (;;)
+	{
+		count++;
+		cap >> frame;
+		if (frame.empty())
+		{
+			cout << "The " << count << " frame image read failed!" << endl;
+			status = FALSE;
+			goto exit;
+		}
+		imshow("Video", frame);
+		if (waitKey(33) >= 0)
+		{
+			break;
+		}
+	}
+
+exit:
+	destroyWindow("Video");
+	return status;
+}
+
+TestCV* TestCV::m_pstTCV = NULL;
