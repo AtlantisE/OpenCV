@@ -13,6 +13,15 @@ private:
 	}
 
 public:
+	static VideoCapture g_cap;
+	static void onTrackbarSlide(int pos, void*);
+	static int g_slider_position;
+	static int g_run;
+	static int g_dontset;
+
+	int Chapter2_addTrackbarSlideInVideo(const string& strVideoFile);
+
+public:
 
 	~TestCV()
 	{
