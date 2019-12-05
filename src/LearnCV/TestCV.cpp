@@ -123,6 +123,36 @@ exit:
 	return status;
 }
 
+int TestCV::Chapter2_GaussianBlur(const cv::Mat& image)
+{
+	int status = OK;
+	namedWindow("Origin image", cv::WINDOW_AUTOSIZE);
+	namedWindow("Gaussian1 image", cv::WINDOW_AUTOSIZE);
+	namedWindow("Gaussian2 image", cv::WINDOW_AUTOSIZE);
+
+	imshow("Origin image", image);
+	cout << "origin image size: (" << image.rows << "," << image.cols << ")" << endl;
+	Mat out;
+	GaussianBlur(image, out, Size(5, 5), 3, 3);
+	imshow("Gaussian1 image", out);
+	cout << "Gaussian1 image size: (" << out.rows << "," << out.cols << ")" << endl;
+	imwrite("..\\..\\resources\\images\\Gaussian1_5x5.jpg", out);
+	GaussianBlur(out, out, Size(5, 5), 3, 3);
+	imshow("Gaussian2 image", out);
+
+	cout << "Gaussian2 image size: (" << out.rows << "," << out.cols << ")" << endl;
+	imwrite("..\\..\\resources\\images\\Gaussian2_5x5.jpg", out);
+	if (waitKey(0) == 27)
+	{
+		goto exit;
+	}
+
+exit:
+	destroyAllWindows();
+	return status;
+
+}
+
 TestCV* TestCV::m_pstTCV = NULL;
 int TestCV::g_dontset = 0;
 int TestCV::g_run = 1;

@@ -19,8 +19,6 @@ public:
 	static int g_run;
 	static int g_dontset;
 
-	int Chapter2_addTrackbarSlideInVideo(const string& strVideoFile);
-
 public:
 
 	~TestCV()
@@ -43,6 +41,8 @@ public:
 
 	int Chapter2_ReadImage(const string& strImgFile);
 	int Chapter2_ReadVideo(const string& strVideoFile);
+	int Chapter2_addTrackbarSlideInVideo(const string& strVideoFile);
+	int Chapter2_GaussianBlur(const cv::Mat& image);
 
 
 };
