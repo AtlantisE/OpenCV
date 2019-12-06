@@ -32,7 +32,15 @@ int TestCV::Chapter2_ReadVideo(const string& strVideoFile)
 	int count = 0;//count frame number
 
 	namedWindow("Video", WINDOW_AUTOSIZE);
-	cap.open(strVideoFile);
+	if (strVideoFile == "")
+	{
+		cap.open(0);//random a camera opened
+	}
+	else
+	{
+		cap.open(strVideoFile);
+	}
+	
 	if (cap.isOpened() == false)
 	{
 		cout << "Video <" << strVideoFile << "> open failed!" << endl;
@@ -151,6 +159,70 @@ exit:
 	destroyAllWindows();
 	return status;
 
+}
+
+int TestCV::Chapter2_PyrDown(const cv::Mat& image)
+{
+	int status = OK;
+	Mat out;
+	
+	if (image.empty())
+	{
+		status = FALSE;
+		goto exit;
+	}
+	namedWindow("Origin image", WINDOW_AUTOSIZE);
+	imshow("Origin image", image);
+	cout << "origin image size: (" << image.rows << "," << image.cols << ")" << endl;
+
+	
+	pyrDown(image, out);
+	namedWindow("PyrDown image", WINDOW_AUTOSIZE);
+	imshow("PyrDown image", out);
+	cout << "PyrDown image size: (" << out.rows << "," << out.cols << ")" << endl;
+
+	if (waitKey(0) == 27)
+	{
+		goto exit;
+	}
+exit:
+	destroyAllWindows();
+	return status;
+
+}
+int TestCV::Chapter2_Canny(const Mat& img_color)
+{
+	int status = OK;
+	Mat img_gray, img_out;
+
+	if (img_color.empty())
+	{
+		status = FALSE;
+		goto exit;
+	}
+	namedWindow("Color", WINDOW_AUTOSIZE);
+	imshow("Color", img_color);
+	cout << "color image size: (" << img_color.rows << "," << img_color.cols << ")" << endl;
+
+	cvtColor(img_color, img_gray, COLOR_BGR2GRAY);
+	namedWindow("Gray", WINDOW_AUTOSIZE);
+	imshow("Gray", img_gray);
+	cout << "gray image size: (" << img_gray.rows << "," << img_gray.cols << ")" << endl;
+
+	Canny(img_gray, img_out, 10, 100, 3, true);
+
+	namedWindow("Edge", WINDOW_AUTOSIZE);
+	imshow("Edge", img_out);
+	cout << "edge image size: (" << img_out.rows << "," << img_out.cols << ")" << endl;
+
+	if (waitKey(0) == 27)
+	{
+		goto exit;
+	}
+
+exit:
+	destroyAllWindows();
+	return status;
 }
 
 TestCV* TestCV::m_pstTCV = NULL;

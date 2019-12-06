@@ -43,6 +43,8 @@ public:
 	int Chapter2_ReadVideo(const string& strVideoFile);
 	int Chapter2_addTrackbarSlideInVideo(const string& strVideoFile);
 	int Chapter2_GaussianBlur(const cv::Mat& image);
+	int Chapter2_PyrDown(const cv::Mat& image);
+	int Chapter2_Canny(const Mat& img_color);
 
 
 };

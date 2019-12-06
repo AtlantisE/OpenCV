@@ -44,13 +44,38 @@ int testChapter2_GaussianBlur(const std::string& strFile)
 
 }
 
+int testChapter2_PyrDown(const std::string& strFile)
+{
+	Mat image = imread(strFile);
+	int status = pTCV->Chapter2_PyrDown(image);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter2_PyrDown failed!" << endl;
+	}
+	return status;
+
+}
+
+int testChapter2_Canny(const std::string& strFile)
+{
+	Mat image = imread(strFile);
+	int status = pTCV->Chapter2_Canny(image);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter2_Canny failed!" << endl;
+	}
+	return status;
+
+}
+
 int main()
 {
 	int status = OK;
 	
 	string strImgFile = "..\\..\\resources\\images\\hand.jpg";
 	string strVideoFile = "..\\..\\resources\\videos\\dldl8080.mp4";
-	string strLenaImage = "..\\..\\resources\\images\\lena.jpg";
+	string strGirlImgFile= "..\\..\\resources\\images\\lena.jpg";
+	string strGirlColorFile = "..\\..\\resources\\images\\lena_color.jpg";
 
 	/*status = testChapter2_ReadImage(strImgFile);
 	if (status == FALSE)
@@ -70,7 +95,26 @@ int main()
 		goto exit;
 	}*/
 
-	status = testChapter2_GaussianBlur(strLenaImage);
+	/*status = testChapter2_GaussianBlur(strGirlImgFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter2_PyrDown(strGirlImgFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter2_Canny(strGirlColorFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	//read image from camera
+	status = testChapter2_ReadVideo("");
 	if (status == FALSE)
 	{
 		goto exit;
