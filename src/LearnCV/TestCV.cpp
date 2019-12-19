@@ -225,6 +225,87 @@ exit:
 	return status;
 }
 
+int TestCV::Chapter2_VideoWriter(const string& strVideoFile)
+{
+	int status = OK;
+	
+	VideoWriter vwriter;
+	VideoCapture cap;
+	double fps = 0;
+	Size size;
+	Mat logpolar_frame, bgr_frame;
+
+	cap.open(0);//open camera
+	if (cap.isOpened() == false)
+	{
+		cout << "Error:Camera open failed!" << endl;
+		status = FALSE;
+		goto exit;
+	}
+
+	fps = cap.get(CAP_PROP_FPS);
+	size.width = cap.get(CAP_PROP_FRAME_WIDTH);
+	size.height = cap.get(CAP_PROP_FRAME_HEIGHT);
+	vwriter.open(strVideoFile, 0, fps, size);
+
+	namedWindow("Color", WINDOW_AUTOSIZE);
+	namedWindow("LogPolar", WINDOW_AUTOSIZE);
+	for (;;)
+	{
+		cap >> bgr_frame;
+		if (bgr_frame.empty())
+		{
+			cout << "Error: get frame failed from CaptureVideo!" << endl;
+			status = FALSE;
+			goto exit;
+		}
+		imshow("Color", bgr_frame);
+
+		logPolar(bgr_frame, logpolar_frame, Point2f(bgr_frame.cols / 4, bgr_frame.rows / 4),
+			40, WARP_FILL_OUTLIERS);
+		imshow("LogPolar", logpolar_frame);
+		vwriter << logpolar_frame;
+		if (waitKey(10) == 27)
+			break;
+
+	}
+
+exit:
+	destroyAllWindows();
+	return status;
+}
+
+int TestCV::Chapter5_AddWeighted(const string& strImgFile1,
+	const string& strImgFile2,
+	const double alpha,
+	const double beta,
+	const double gamma)
+{
+
+	int status = OK;
+	Mat src1 = imread(strImgFile1);
+	Mat src2 = imread(strImgFile2);
+	Mat out;
+	//check img whether empty
+	if (src1.empty() || src2.empty())
+	{
+		cout << "Error:Mat src1 or src2 is empty!" << endl;
+		status = FALSE;
+		goto exit;
+	}
+	
+	addWeighted(src1, alpha, src2, beta, gamma, out);
+	cout << "weighted image: width=" << out.cols << ", height=" << out.rows << endl;
+	imwrite("..\\..\\resources\\images\\chapter5\\weight.bmp", out);
+	namedWindow("AddWeight", WINDOW_AUTOSIZE);
+	imshow("AddWeight", out);
+	waitKey(0);
+
+exit:
+	destroyAllWindows();
+	return status;
+}
+
 TestCV* TestCV::m_pstTCV = NULL;
 int TestCV::g_dontset = 0;
 int TestCV::g_run = 1;

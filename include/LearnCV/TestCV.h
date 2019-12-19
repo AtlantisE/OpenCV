@@ -45,6 +45,13 @@ public:
 	int Chapter2_GaussianBlur(const cv::Mat& image);
 	int Chapter2_PyrDown(const cv::Mat& image);
 	int Chapter2_Canny(const Mat& img_color);
+	int Chapter2_VideoWriter(const string& strVideoFile);
+
+	int Chapter5_AddWeighted(const string& strImgFile1, 
+		const string& strImgFile2, 
+		const double alpha,
+		const double beta,
+		const double gamma);
 
 
 };
