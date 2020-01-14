@@ -87,6 +87,145 @@ int testChapter5_AddWeighted(const std::string& strFile1, const std::string& str
 	}
 	return status;
 }
+int testChapter10_CopyMakeBorder(const std::string& strFile)
+{
+	int status = pTCV->Chapter10_CopyMakeBorder(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter10_CopyMakeBorder failed!" << endl;
+	}
+	return status;
+}
+
+int testCommon_Split(const std::string& strFile)
+{
+	int status = pTCV->Common_Split(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Common_Split failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter10_Threshold(const std::string& strFile)
+{
+	int status = pTCV->Chapter10_Threshold(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter10_Threshold failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter10_BilateralFilter(const std::string& strFile)
+{
+	int status = pTCV->Chapter10_BilateralFilter(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter10_BilateralFilter failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter10_ErodeAndDilate(const std::string& strFile)
+{
+	int status = pTCV->Chapter10_DilateAndErode(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter10_DilateAndErode failed!" << endl;
+	}
+	return status;
+}
+
+int Common_CvtColor2Gray(const std::string& strColorFile)
+{
+	int status = pTCV->Common_CvtColorToGrey(strColorFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Common_CvtColorToGrey failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter10_GaussianBlur(const std::string& strFile)
+{
+	int status = pTCV->Chapter10_GaussianBlur(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter10_GaussianBlur failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter11_PyrDown_Up(const std::string& strFile)
+{
+	int status = pTCV->Chapter11_PyDown_Up(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter11_PyDown_Up failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter11_BuildPyramid(const std::string& strFile)
+{
+	int status = pTCV->Chapter11_BuildPyramid(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter11_BuildPyramid failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter11_WarpAffine(const std::string& strFile)
+{
+	int status = pTCV->Chapter11_WarpAffine(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter11_WarpAffine failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter11_WarpPerspective(const std::string& strFile)
+{
+	int status = pTCV->Chapter11_WarpPerspective(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter11_WarpPerspective failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter11_CartPolar(const std::string& strFile)
+{
+	int status = pTCV->Chapter11_CartPolar(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter11_CartPolar failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter11_Remap(const std::string& strFile)
+{
+	int status = pTCV->Chapter11_Remap(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter11_Remap failed!" << endl;
+	}
+	return status;
+}
+
+int testChapter11_Inpaint(const std::string& strFile)
+{
+	int status = pTCV->Chapter11_Inpaint(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter11_Inpaint failed!" << endl;
+	}
+	return status;
+}
 
 int main()
 {
@@ -94,11 +233,19 @@ int main()
 	
 	string strImgFile = "..\\..\\resources\\images\\hand.jpg";
 	string strVideoFile = "..\\..\\resources\\videos\\dldl8080.mp4";
-	string strGirlImgFile= "..\\..\\resources\\images\\lena.jpg";
+	string strGirlGreyFile= "..\\..\\resources\\images\\lena_gray.bmp";
 	string strGirlColorFile = "..\\..\\resources\\images\\lena_color.jpg";
+	string strGirlColorBadFile = "..\\..\\resources\\images\\lena_color_copy.jpg";
 	string strSavedVideoFile = "..\\..\\resources\\videos\\video.avi";
 	string strSrcImgFile1 = "..\\..\\resources\\images\\chapter5\\gray125.bmp";
 	string strSrcImgFile2 = "..\\..\\resources\\images\\chapter5\\gray25.bmp";
+	string strCircleFile = "..\\..\\resources\\images\\circle.jpg";
+
+	/*status = Common_CvtColor2Gray(strGirlColorFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
 
 	/*status = testChapter2_ReadImage(strImgFile);
 	if (status == FALSE)
@@ -150,11 +297,11 @@ int main()
 		goto exit;
 	}*/
 
-	status = testChapter5_AddWeighted(strSrcImgFile1, strSrcImgFile2);
+	/*status = testChapter5_AddWeighted(strSrcImgFile1, strSrcImgFile2);
 	if (status == FALSE)
 	{
 		goto exit;
-	}
+	}*/
 
 	//Point2i p(2, 3);
 	//cout << "Point:x=" << p.x << ", y=" << p.y << endl;
@@ -201,6 +348,83 @@ int main()
 
 	//cout << "sum:" << s1 << endl;
 
+	/*status = testChapter10_CopyMakeBorder(strGirlImgFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testCommon_Split(strGirlColorFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter10_Threshold(strGirlImgFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter10_GaussianBlur(strGirlGreyFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter10_BilateralFilter(strGirlColorFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter10_ErodeAndDilate(strGirlGreyFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter11_PyrDown_Up(strGirlGreyFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter11_BuildPyramid(strGirlGreyFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter11_WarpAffine(strGirlGreyFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter11_WarpPerspective(strGirlGreyFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter11_CartPolar(strCircleFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	/*status = testChapter11_Remap(strGirlColorFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	status = testChapter11_Inpaint(strGirlColorBadFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}
 
 exit:
 	system("pause");
