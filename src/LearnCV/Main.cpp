@@ -227,6 +227,16 @@ int testChapter11_Inpaint(const std::string& strFile)
 	return status;
 }
 
+int testChapter11_FastNlMeanDenoising(const std::string& strFile)
+{
+	int status = pTCV->Chapter11_FastNlMeanDenoising(strFile);
+	if (status == FALSE)
+	{
+		cout << "TestCV::Chapter11_FastNlMeanDenoising failed!" << endl;
+	}
+	return status;
+}
+
 int main()
 {
 	int status = OK;
@@ -240,6 +250,7 @@ int main()
 	string strSrcImgFile1 = "..\\..\\resources\\images\\chapter5\\gray125.bmp";
 	string strSrcImgFile2 = "..\\..\\resources\\images\\chapter5\\gray25.bmp";
 	string strCircleFile = "..\\..\\resources\\images\\circle.jpg";
+	string strLenaGaussianFile = "..\\..\\resources\\images\\lena_color_Gaussian_sigma15.jpg";
 
 	/*status = Common_CvtColor2Gray(strGirlColorFile);
 	if (status == FALSE)
@@ -420,7 +431,13 @@ int main()
 		goto exit;
 	}*/
 
-	status = testChapter11_Inpaint(strGirlColorBadFile);
+	/*status = testChapter11_Inpaint(strGirlColorBadFile);
+	if (status == FALSE)
+	{
+		goto exit;
+	}*/
+
+	status = testChapter11_FastNlMeanDenoising(strLenaGaussianFile);
 	if (status == FALSE)
 	{
 		goto exit;

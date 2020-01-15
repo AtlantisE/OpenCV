@@ -1015,6 +1015,44 @@ exit:
 	return status;
 }
 
+int TestCV::Chapter11_FastNlMeanDenoising(const string& strSrcImgFile)
+{
+	int status = OK;
+	Mat srcImg = imread(strSrcImgFile);
+	Mat dstImg;
+	
+	//check img whether empty
+	if (srcImg.empty())
+	{
+		cout << "Error:Mat srcImg is empty!" << endl;
+		status = FALSE;
+		goto exit;
+	}
+
+	namedWindow("Src Image", WINDOW_AUTOSIZE);
+	imshow("Src Image", srcImg);
+	cout << "src image rows=" << srcImg.rows << ", cols=" << srcImg.cols << endl;
+
+	fastNlMeansDenoisingColored(srcImg, dstImg, 5.0f, 5.0f, 7, 21);
+	if (dstImg.empty())
+	{
+		cout << "Error:Mat dstImg is empty!" << endl;
+		status = FALSE;
+		goto exit;
+	}
+	//imwrite("../../resources/images/lena_fnlmd.jpg", dstImg);
+
+	namedWindow("FNLMD Image", WINDOW_AUTOSIZE);
+	imshow("FNLMD Image", dstImg);
+	cout << "FNLMD image rows=" << dstImg.rows << ", cols=" << dstImg.cols << endl;
+
+	waitKey(0);
+
+exit:
+	destroyAllWindows();
+	return status;
+}
+
 TestCV* TestCV::m_pstTCV = NULL;
 int TestCV::g_dontset = 0;
 int TestCV::g_run = 1;

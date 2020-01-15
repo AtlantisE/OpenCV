@@ -78,5 +78,6 @@ public:
 	int Chapter11_CartPolar(const string& strSrcImgFile);
 	int Chapter11_Remap(const string& strSrcImgFile);
 	int Chapter11_Inpaint(const string& strSrcImgFile);
+	int Chapter11_FastNlMeanDenoising(const string& strSrcImgFile);
 
 };
